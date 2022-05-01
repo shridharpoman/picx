@@ -17,6 +17,7 @@
     "require-jsdoc": "off",
     "react/react-in-jsx-scope": "off",
     "object-curly-spacing": "off",
-    "indent": "off"
+    "indent": "off",
+    "quotes": "off"
   }
 }
