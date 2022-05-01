@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "picx",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/home/shridharp/cloud-project/picx/amplify/backend/api/picx/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 90,
+      "apiKeyExpirationDate": "2022-07-30T21:33:07.696Z",
+      "keyDescription": "graph api key"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authpicxd4e835a7"
+      }
+    ]
+  }
+}
