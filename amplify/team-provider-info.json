@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-picx-dev-130337-authRole",
+      "UnauthRoleArn": "arn:aws:iam::615682260523:role/amplify-picx-dev-130337-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::615682260523:role/amplify-picx-dev-130337-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-picx-dev-130337-deployment",
+      "UnauthRoleName": "amplify-picx-dev-130337-unauthRole",
+      "StackName": "amplify-picx-dev-130337",
+      "StackId": "arn:aws:cloudformation:us-east-1:615682260523:stack/amplify-picx-dev-130337/a51acd40-c970-11ec-8376-12417c204a79",
+      "AmplifyAppId": "dtsug42d5bc4n"
+    },
+    "categories": {
+      "auth": {
+        "picxd4e835a7": {}
+      }
+    }
+  }
+}
