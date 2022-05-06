@@ -14,6 +14,7 @@ export default function Login() {
     const router = useRouter();
     const [signInError, setSignInError] = useState<string>("");
 
+
     const {
         register,
         formState: { errors },
@@ -41,7 +42,7 @@ export default function Login() {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                <Grid container direction="column" alignItems="center" justifyContent="center">
+                <Grid container direction="column" alignItems="center" justifyContent="space-around" spacing={5} marginTop={3}>
                     <Grid item>
                         <TextField
                             variant="outlined"
@@ -50,6 +51,10 @@ export default function Login() {
                             type="text"
                             error={errors.username ? true : false}
                             helperText={errors.username ? errors.username.message : null}
+                            InputLabelProps={{
+                                style: { color: '#0073f7' },
+                                margin: "dense",
+                            }}
                             {...register("username")}
                         />
                     </Grid>

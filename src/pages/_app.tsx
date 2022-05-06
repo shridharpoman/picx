@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../theme';
 import type { AppProps } from 'next/app';
+import Header from "../components/Header";
 import { Amplify } from 'aws-amplify';
 
 import awsconfig from '../aws-exports';
@@ -34,6 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           {/* CssBaseline kickstart an elegant, consistent,
            and simple baseline to build upon. */}
           <CssBaseline />
+          <Header />
           <Component {...pageProps} />
         </ThemeProvider>
       </AuthContext>
