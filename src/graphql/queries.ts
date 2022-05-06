@@ -7,10 +7,47 @@ export const getPost = /* GraphQL */ `
     getPost(id: $id) {
       id
       title
+      contents
+      upvotes
+      downvotes
+      image
+      votes {
+        items {
+          id
+          vote
+          postID
+          post {
+            id
+            title
+            contents
+            upvotes
+            downvotes
+            image
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       comments {
         items {
           id
           postID
+          post {
+            id
+            title
+            contents
+            upvotes
+            downvotes
+            image
+            createdAt
+            updatedAt
+            owner
+          }
           content
           createdAt
           updatedAt
@@ -34,7 +71,30 @@ export const listPosts = /* GraphQL */ `
       items {
         id
         title
+        contents
+        upvotes
+        downvotes
+        image
+        votes {
+          items {
+            id
+            vote
+            postID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
         }
         createdAt
@@ -53,7 +113,30 @@ export const getComment = /* GraphQL */ `
       post {
         id
         title
+        contents
+        upvotes
+        downvotes
+        image
+        votes {
+          items {
+            id
+            vote
+            postID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
         }
         createdAt
@@ -80,11 +163,102 @@ export const listComments = /* GraphQL */ `
         post {
           id
           title
+          contents
+          upvotes
+          downvotes
+          image
+          votes {
+            nextToken
+          }
+          comments {
+            nextToken
+          }
           createdAt
           updatedAt
           owner
         }
         content
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getVote = /* GraphQL */ `
+  query GetVote($id: ID!) {
+    getVote(id: $id) {
+      id
+      vote
+      postID
+      post {
+        id
+        title
+        contents
+        upvotes
+        downvotes
+        image
+        votes {
+          items {
+            id
+            vote
+            postID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listVotes = /* GraphQL */ `
+  query ListVotes(
+    $filter: ModelVoteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listVotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        vote
+        postID
+        post {
+          id
+          title
+          contents
+          upvotes
+          downvotes
+          image
+          votes {
+            nextToken
+          }
+          comments {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          owner
+        }
         createdAt
         updatedAt
         owner

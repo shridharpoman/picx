@@ -10,10 +10,47 @@ export const createPost = /* GraphQL */ `
     createPost(input: $input, condition: $condition) {
       id
       title
+      contents
+      upvotes
+      downvotes
+      image
+      votes {
+        items {
+          id
+          vote
+          postID
+          post {
+            id
+            title
+            contents
+            upvotes
+            downvotes
+            image
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       comments {
         items {
           id
           postID
+          post {
+            id
+            title
+            contents
+            upvotes
+            downvotes
+            image
+            createdAt
+            updatedAt
+            owner
+          }
           content
           createdAt
           updatedAt
@@ -35,10 +72,47 @@ export const updatePost = /* GraphQL */ `
     updatePost(input: $input, condition: $condition) {
       id
       title
+      contents
+      upvotes
+      downvotes
+      image
+      votes {
+        items {
+          id
+          vote
+          postID
+          post {
+            id
+            title
+            contents
+            upvotes
+            downvotes
+            image
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       comments {
         items {
           id
           postID
+          post {
+            id
+            title
+            contents
+            upvotes
+            downvotes
+            image
+            createdAt
+            updatedAt
+            owner
+          }
           content
           createdAt
           updatedAt
@@ -60,10 +134,47 @@ export const deletePost = /* GraphQL */ `
     deletePost(input: $input, condition: $condition) {
       id
       title
+      contents
+      upvotes
+      downvotes
+      image
+      votes {
+        items {
+          id
+          vote
+          postID
+          post {
+            id
+            title
+            contents
+            upvotes
+            downvotes
+            image
+            createdAt
+            updatedAt
+            owner
+          }
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       comments {
         items {
           id
           postID
+          post {
+            id
+            title
+            contents
+            upvotes
+            downvotes
+            image
+            createdAt
+            updatedAt
+            owner
+          }
           content
           createdAt
           updatedAt
@@ -88,7 +199,30 @@ export const createComment = /* GraphQL */ `
       post {
         id
         title
+        contents
+        upvotes
+        downvotes
+        image
+        votes {
+          items {
+            id
+            vote
+            postID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
         }
         createdAt
@@ -113,7 +247,30 @@ export const updateComment = /* GraphQL */ `
       post {
         id
         title
+        contents
+        upvotes
+        downvotes
+        image
+        votes {
+          items {
+            id
+            vote
+            postID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
         }
         createdAt
@@ -138,7 +295,30 @@ export const deleteComment = /* GraphQL */ `
       post {
         id
         title
+        contents
+        upvotes
+        downvotes
+        image
+        votes {
+          items {
+            id
+            vote
+            postID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
         comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
         }
         createdAt
@@ -146,6 +326,150 @@ export const deleteComment = /* GraphQL */ `
         owner
       }
       content
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createVote = /* GraphQL */ `
+  mutation CreateVote(
+    $input: CreateVoteInput!
+    $condition: ModelVoteConditionInput
+  ) {
+    createVote(input: $input, condition: $condition) {
+      id
+      vote
+      postID
+      post {
+        id
+        title
+        contents
+        upvotes
+        downvotes
+        image
+        votes {
+          items {
+            id
+            vote
+            postID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateVote = /* GraphQL */ `
+  mutation UpdateVote(
+    $input: UpdateVoteInput!
+    $condition: ModelVoteConditionInput
+  ) {
+    updateVote(input: $input, condition: $condition) {
+      id
+      vote
+      postID
+      post {
+        id
+        title
+        contents
+        upvotes
+        downvotes
+        image
+        votes {
+          items {
+            id
+            vote
+            postID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteVote = /* GraphQL */ `
+  mutation DeleteVote(
+    $input: DeleteVoteInput!
+    $condition: ModelVoteConditionInput
+  ) {
+    deleteVote(input: $input, condition: $condition) {
+      id
+      vote
+      postID
+      post {
+        id
+        title
+        contents
+        upvotes
+        downvotes
+        image
+        votes {
+          items {
+            id
+            vote
+            postID
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        comments {
+          items {
+            id
+            postID
+            content
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       owner
