@@ -28,9 +28,6 @@ export default function Create({ }: Props): ReactElement {
     } = useForm<IFormInput>();
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-        console.log(file);
-        console.log(data);
-
         // User uploaded file
         if (file) {
             // Send a request to upload to the S3 Bucket.
@@ -55,7 +52,6 @@ export default function Create({ }: Props): ReactElement {
                     authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
                 })) as { data: CreatePostMutation };
 
-                console.log("New post created successfully:", createNewPost);
 
                 router.push(`/post/${createNewPost.data.createPost.id}`);
             } catch (error) {

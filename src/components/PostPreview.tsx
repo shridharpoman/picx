@@ -66,11 +66,10 @@ export default function PostPreview({ post }: Props): ReactElement {
         async function getImageFromStorage() {
             try {
                 const signedURL = await Storage.get(post.image); // get key from Storage.list
-                console.log("Found Image:", signedURL);
                 // @ts-ignore
                 setPostImage(signedURL);
             } catch (error) {
-                console.log("No image found.");
+                console.error("No image found.");
             }
         }
 
@@ -104,7 +103,6 @@ export default function PostPreview({ post }: Props): ReactElement {
             }
             setExistingVote(voteType);
             setExistingVoteId(updateThisVote.data.updateVote.id);
-            console.log("Updated vote:", updateThisVote);
         }
 
         if (!existingVote) {
@@ -127,13 +125,9 @@ export default function PostPreview({ post }: Props): ReactElement {
             }
             setExistingVote(voteType);
             setExistingVoteId(createNewVote.data.createVote.id);
-            console.log("Created vote:", createNewVote);
         }
     };
 
-    console.log(post);
-    console.log("Upvotes:", upvotes);
-    console.log("Downvotes:", downvotes);
 
     return (
         <Paper elevation={3}>
