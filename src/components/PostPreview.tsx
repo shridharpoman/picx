@@ -69,7 +69,7 @@ export default function PostPreview({ post }: Props): ReactElement {
                 // @ts-ignore
                 setPostImage(signedURL);
             } catch (error) {
-                console.error("No image found.");
+                throw new Error("Something went wrong :'(", error);
             }
         }
 
