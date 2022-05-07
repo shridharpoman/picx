@@ -38,8 +38,6 @@ export default function IndividualPost({ post }: Props): ReactElement {
     } = useForm<IFormInput>();
 
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-        console.log(data);
-
         const newCommentInput: CreateCommentInput = {
             postID: post.id,
             content: data.comment,
@@ -54,7 +52,6 @@ export default function IndividualPost({ post }: Props): ReactElement {
         setComments([...comments, createNewComment.data.createComment as Comment]);
     };
 
-    console.log("Got post:", post);
 
     return (
         <Container maxWidth="md">

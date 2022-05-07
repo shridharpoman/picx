@@ -8,7 +8,6 @@ interface Props {
 }
 
 export default function PostComment({ comment }: Props): ReactElement {
-    console.log("comment:", comment);
     return (
         <Paper
             style={{ width: "100%", minHeight: 128, padding: 16, marginTop: 32 }}

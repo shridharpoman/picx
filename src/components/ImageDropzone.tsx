@@ -10,7 +10,9 @@ interface Props {
 export default function ImageDropzone({ file, setFile }: Props) {
     const { getRootProps, getInputProps } = useDropzone({
         maxFiles: 1,
-        accept: "image/*",
+        accept: {
+            'image/*': ['.png', '.gif', '.jpeg', '.jpg'],
+        },
         onDrop: (acceptedFiles) => {
             setFile(acceptedFiles[0]);
         },
