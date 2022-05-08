@@ -2,6 +2,8 @@ import React from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Theme } from '@mui/material/styles';
 import AppBar from "@mui/material/AppBar";
+import LoginIcon from '@mui/icons-material/Login';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -46,7 +48,19 @@ export default function Header() {
 
     const signUserOut = async () => {
         await Auth.signOut();
+        // setUsername("Guest User");
     };
+
+    // const [username, setUsername] = useState<string>(
+    //     "Guest User",
+    // );
+
+    // useEffect(() => {
+    //     if (user) {
+    //         setUsername(user.getUsername());
+    //     }
+    // }, [user]);
+    // console.log(username);
 
     return (
         <div className={classes.root}>
@@ -61,9 +75,13 @@ export default function Header() {
                     >
                         <AppleIcon />
                     </IconButton>
+
                     <Typography variant="h6" className={classes.title}>
                         Picx
                     </Typography>
+                    {/* <Typography variant="h6" className={classes.title}>
+                        {username}
+                    </Typography> */}
                     {user && (
                         <div>
                             <Tooltip title="Create Post">
@@ -105,12 +123,13 @@ export default function Header() {
                     )}
                     {!user && (
                         <>
-                            <Button variant="outlined" onClick={() => router.push(`/login`)}>
+                            <Button variant="outlined" startIcon={<LoginIcon />} onClick={() => router.push(`/login`)}>
                                 Login
                             </Button>
                             <Button
                                 variant="contained"
                                 color="primary"
+                                endIcon={<HowToRegIcon />}
                                 onClick={() => router.push(`/signup`)}
                             >
                                 Sign Up
