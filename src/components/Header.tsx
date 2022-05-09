@@ -9,7 +9,6 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useUser } from "../context/AuthContext";
-import AppleIcon from "@mui/icons-material/Apple";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
@@ -27,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         title: {
             flexGrow: 1,
+        },
+        logo: {
+            maxWidth: 60,
         },
     }),
 );
@@ -60,7 +62,7 @@ export default function Header() {
     //         setUsername(user.getUsername());
     //     }
     // }, [user]);
-    // console.log(username);
+    // // console.log(username);
 
     return (
         <div className={classes.root}>
@@ -73,7 +75,7 @@ export default function Header() {
                         aria-label="menu"
                         onClick={() => router.push(`/`)}
                     >
-                        <AppleIcon />
+                        <img src="/binghamtonbearcatslogo-freelogovectors.net_.png" alt="logo" className={classes.logo} />
                     </IconButton>
 
                     <Typography variant="h6" className={classes.title}>
