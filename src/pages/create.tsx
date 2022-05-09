@@ -3,11 +3,13 @@ import { Container } from "@mui/material";
 import React, { ReactElement, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ImageDropzone from "../components/ImageDropzone";
+import Snackbar from '@mui/material/Snackbar';
 import { API, Storage } from "aws-amplify";
 import { v4 as uuidv4 } from "uuid";
 import { createPost } from "../graphql/mutations";
 import { CreatePostInput, CreatePostMutation } from "../API";
 import { useRouter } from "next/router";
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
 
 interface IFormInput {
@@ -17,9 +19,27 @@ interface IFormInput {
 
 interface Props { }
 
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref,
+) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export default function Create({ }: Props): ReactElement {
     const [file, setFile] = useState<File>();
+    const [open, setOpen] = useState(false);
+    const [alertText, setAlertText] = useState("");
     const router = useRouter();
+
+
+    const handlePostClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     const {
         register,
@@ -52,26 +72,34 @@ export default function Create({ }: Props): ReactElement {
                     authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
                 })) as { data: CreatePostMutation };
 
-
+                setOpen(true);
+                setAlertText("Post created");
                 router.push(`/post/${createNewPost.data.createPost.id}`);
             } catch (error) {
-                console.error("Error uploading file: ", error);
+                setOpen(true);
+                setAlertText(error.message);
             }
         } else {
-            const createNewPostWithoutImageInput: CreatePostInput = {
-                title: data.title,
-                contents: data.content,
-                upvotes: 0,
-                downvotes: 0,
-            };
+            try {
+                const createNewPostWithoutImageInput: CreatePostInput = {
+                    title: data.title,
+                    contents: data.content,
+                    upvotes: 0,
+                    downvotes: 0,
+                };
 
-            const createNewPostWithoutImage = (await API.graphql({
-                query: createPost,
-                variables: { input: createNewPostWithoutImageInput },
-                authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
-            })) as { data: CreatePostMutation };
-
-            router.push(`/post/${createNewPostWithoutImage.data.createPost.id}`);
+                const createNewPostWithoutImage = (await API.graphql({
+                    query: createPost,
+                    variables: { input: createNewPostWithoutImageInput },
+                    authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+                })) as { data: CreatePostMutation };
+                setOpen(true);
+                setAlertText("Post created");
+                router.push(`/post/${createNewPostWithoutImage.data.createPost.id}`);
+            } catch (error) {
+                setOpen(true);
+                setAlertText(error.message);
+            }
         }
     };
 
@@ -79,7 +107,7 @@ export default function Create({ }: Props): ReactElement {
         <Container maxWidth="md">
             {/* Create a form where: */}
             <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                <Grid container spacing={4} direction="column">
+                <Grid container spacing={4} direction="column" >
                     {/* Title of the post */}
                     <Grid item>
                         <TextField
@@ -125,14 +153,25 @@ export default function Create({ }: Props): ReactElement {
                         />
                     </Grid>
                     {/* Optional Image of the post */}
-                    <Grid item>
+                    <Grid item marginBottom={2}>
                         <ImageDropzone file={file} setFile={setFile} />
                     </Grid>
 
                     {/* Button to submit the form with those contents */}
+
                     <Button variant="contained" type="submit">
                         Create Post
                     </Button>
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handlePostClose}>
+                        <Alert onClose={handlePostClose} severity="error" sx={{ width: '100%' }}>
+                            {alertText}
+                        </Alert>
+                    </Snackbar>
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handlePostClose}>
+                        <Alert onClose={handlePostClose} severity="success" sx={{ width: '100%' }}>
+                            {alertText}
+                        </Alert>
+                    </Snackbar>
                 </Grid>
             </form>
         </Container>

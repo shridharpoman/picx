@@ -26,6 +26,9 @@ const theme = createTheme({
       disabled: "rgba(255, 255, 255, 0.38)",
       // hint: "rgba(255, 255, 255, 0.38)",
     },
+    warning: {
+      main: "#005A43",
+    },
   },
   typography: {
     button: {
