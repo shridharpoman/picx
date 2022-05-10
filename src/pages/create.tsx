@@ -30,6 +30,7 @@ export default function Create({ }: Props): ReactElement {
     const [file, setFile] = useState<File>();
     const [open, setOpen] = useState(false);
     const [alertText, setAlertText] = useState("");
+    const [alertType, setAlertType] = useState<string>("Warning");
     const router = useRouter();
 
 
@@ -74,10 +75,12 @@ export default function Create({ }: Props): ReactElement {
 
                 setOpen(true);
                 setAlertText("Post created");
+                setAlertType("success");
                 router.push(`/post/${createNewPost.data.createPost.id}`);
             } catch (error) {
                 setOpen(true);
                 setAlertText(error.message);
+                setAlertType("error");
             }
         } else {
             try {
@@ -163,12 +166,12 @@ export default function Create({ }: Props): ReactElement {
                         Create Post
                     </Button>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handlePostClose}>
-                        <Alert onClose={handlePostClose} severity="error" sx={{ width: '100%' }}>
+                        <Alert onClose={handlePostClose} severity={alertType == "success" ? "success" : "error"} sx={{ width: '100%' }}>
                             {alertText}
                         </Alert>
                     </Snackbar>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handlePostClose}>
-                        <Alert onClose={handlePostClose} severity="success" sx={{ width: '100%' }}>
+                        <Alert onClose={handlePostClose} severity={alertType == "success" ? "success" : "error"} sx={{ width: '100%' }}>
                             {alertText}
                         </Alert>
                     </Snackbar>
