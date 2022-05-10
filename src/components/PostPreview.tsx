@@ -173,7 +173,7 @@ export default function PostPreview({ post }: Props): ReactElement {
                             <Grid item>
                                 <Typography variant="body1">
                                     Posted by <b>{post.owner}</b>{" "}
-                                    {formatDatePosted(post.createdAt)} hours ago
+                                    {formatDatePosted(post.createdAt)} hours ago!
                                 </Typography>
                             </Grid>
                             <Grid item>
