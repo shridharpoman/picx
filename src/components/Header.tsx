@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createStyles, makeStyles } from "@mui/styles";
 import { Theme } from '@mui/material/styles';
 import AppBar from "@mui/material/AppBar";
@@ -50,18 +50,18 @@ export default function Header() {
 
     const signUserOut = async () => {
         await Auth.signOut();
-        // setUsername("Guest User");
+        setUsername("Guest User");
     };
 
-    // const [username, setUsername] = useState<string>(
-    //     "Guest User",
-    // );
+    const [username, setUsername] = useState<string>(
+        "Guest User",
+    );
 
-    // useEffect(() => {
-    //     if (user) {
-    //         setUsername(user.getUsername());
-    //     }
-    // }, [user]);
+    useEffect(() => {
+        if (user) {
+            setUsername(user.getUsername());
+        }
+    }, [user]);
     // // console.log(username);
 
     return (
@@ -81,9 +81,9 @@ export default function Header() {
                     <Typography variant="h6" className={classes.title}>
                         Picx
                     </Typography>
-                    {/* <Typography variant="h6" className={classes.title}>
+                    <Typography variant="h6" className={classes.title}>
                         {username}
-                    </Typography> */}
+                    </Typography>
                     {user && (
                         <div>
                             <Tooltip title="Create Post">
