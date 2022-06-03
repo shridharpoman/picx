@@ -174,7 +174,7 @@ export default function PostPreview({ post }: Props): ReactElement {
                             <Grid item>
                                 <Typography variant="body1">
                                     Posted by <b>{post.owner}</b>{" "}
-                                    {moment(post.createdAt).calendar()}
+                                    {moment(post.createdAt).fromNow()}
                                 </Typography>
                             </Grid>
                             <Grid item>
