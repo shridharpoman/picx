@@ -17,11 +17,12 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import formatDatePosted from "../lib/formatDatePosted";
+// import formatDatePosted from "../lib/formatDatePosted";
 import { API, Storage } from "aws-amplify";
 import { createVote, updateVote } from "../graphql/mutations";
 import { GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
 import { useUser } from "../context/AuthContext";
+import moment from "moment";
 
 interface Props {
     post: Post;
@@ -173,7 +174,7 @@ export default function PostPreview({ post }: Props): ReactElement {
                             <Grid item>
                                 <Typography variant="body1">
                                     Posted by <b>{post.owner}</b>{" "}
-                                    {formatDatePosted(post.createdAt)} hours ago!
+                                    {moment(post.createdAt).calendar()}
                                 </Typography>
                             </Grid>
                             <Grid item>
