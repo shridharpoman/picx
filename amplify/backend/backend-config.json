@@ -43,8 +43,8 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 90,
-              "apiKeyExpirationDate": "2022-07-30T21:33:07.696Z",
+              "apiKeyExpirationDays": 365,
+              "apiKeyExpirationDate": "2023-08-25T03:52:46.589Z",
               "description": "graph api key"
             }
           },
